@@ -36,6 +36,10 @@ changelog {
 }
 
 tasks {
+    wrapper {
+        gradleVersion = properties("gradleVersion")
+    }
+
     // Set the JVM compatibility versions
     withType<JavaCompile> {
         sourceCompatibility = "11"
