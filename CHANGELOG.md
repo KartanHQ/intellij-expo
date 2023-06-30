@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+## [1.1.0] - 2023-06-30
+
+### Features
+
+- Add TypeScript support to Expo project generator
+- Add npm run configurations after project generation
+
 ## [1.0.5] - 2023-06-17
 
 ### Bug Fixes
