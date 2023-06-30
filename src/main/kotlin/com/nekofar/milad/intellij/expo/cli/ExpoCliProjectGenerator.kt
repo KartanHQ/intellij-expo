@@ -2,6 +2,7 @@ package com.nekofar.milad.intellij.expo.cli
 
 import com.intellij.execution.filters.Filter
 import com.intellij.ide.util.projectWizard.SettingsStep
+import com.intellij.javascript.CreateRunConfigurationUtil
 import com.intellij.lang.javascript.boilerplate.NpmPackageProjectGenerator
 import com.intellij.lang.javascript.boilerplate.NpxPackageDescriptor
 import com.intellij.openapi.project.Project
@@ -81,4 +82,12 @@ class ExpoCliProjectGenerator : NpmPackageProjectGenerator() {
     }
 
     override fun getIcon(): Icon = ExpoIcons.ProjectGenerator
+
+    override fun onGettingSmartAfterProjectGeneration(project: Project, baseDir: VirtualFile) {
+        super.onGettingSmartAfterProjectGeneration(project, baseDir)
+        CreateRunConfigurationUtil.npmConfiguration(project, "start")
+        CreateRunConfigurationUtil.npmConfiguration(project, "android")
+        CreateRunConfigurationUtil.npmConfiguration(project, "ios")
+        CreateRunConfigurationUtil.npmConfiguration(project, "web")
+    }
 }
