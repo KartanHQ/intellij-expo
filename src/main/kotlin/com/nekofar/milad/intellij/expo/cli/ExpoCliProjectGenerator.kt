@@ -7,13 +7,18 @@ import com.intellij.lang.javascript.boilerplate.NpmPackageProjectGenerator
 import com.intellij.lang.javascript.boilerplate.NpxPackageDescriptor
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.roots.ContentEntry
+import com.intellij.openapi.ui.ComboBox
+import com.intellij.openapi.ui.LabeledComponent
 import com.intellij.openapi.util.Key
 import com.intellij.openapi.util.NlsSafe
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.platform.ProjectGeneratorPeer
 import com.intellij.ui.components.JBCheckBox
+import com.intellij.util.ui.SwingHelper
 import com.nekofar.milad.intellij.expo.ExpoBundle.message
 import com.nekofar.milad.intellij.expo.ExpoIcons
+import java.awt.BorderLayout
+import javax.swing.JComponent
 import javax.swing.JPanel
 
 class ExpoCliProjectGenerator : NpmPackageProjectGenerator() {
@@ -32,6 +37,8 @@ class ExpoCliProjectGenerator : NpmPackageProjectGenerator() {
     override fun customizeModule(virtualFile: VirtualFile, contentEntry: ContentEntry?) {}
 
     override fun createPeer(): ProjectGeneratorPeer<Settings> {
+        val template = ComboBox<Any?>()
+        val templates = listOf("expo-template-blank-typescript")
         val typeScriptCheckbox = JBCheckBox(
             message("expo.project.generator.typescript.checkbox"),
             typeScriptInitial
@@ -40,6 +47,10 @@ class ExpoCliProjectGenerator : NpmPackageProjectGenerator() {
         return object : NpmPackageGeneratorPeer() {
             override fun buildUI(settingsStep: SettingsStep) {
                 super.buildUI(settingsStep)
+                settingsStep.addSettingsField(
+                    message("expo.project.generator.template"),
+                    template
+                )
                 settingsStep.addSettingsComponent(typeScriptCheckbox)
             }
 
@@ -54,8 +65,29 @@ class ExpoCliProjectGenerator : NpmPackageProjectGenerator() {
 
             override fun createPanel(): JPanel {
                 val panel = super.createPanel()
+                panel.add(
+                    createLabeledComponent(
+                        message("expo.project.generator.template"),
+                        template
+                    )
+                )
+                updateTemplates()
                 panel.add(typeScriptCheckbox)
                 return panel
+            }
+
+            private fun createLabeledComponent(text: String, comp: JComponent): LabeledComponent<*> {
+                val component = LabeledComponent.create(comp, text)
+                component.labelLocation = BorderLayout.WEST
+                return component
+            }
+
+            private fun updateTemplates() {
+                SwingHelper.updateItems(
+                    template,
+                    templates,
+                    templates.first()
+                )
             }
         }
     }
