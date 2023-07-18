@@ -9,12 +9,14 @@
 
 
 <!-- Plugin description -->
-Quickly start building a new [Expo](https://expo.dev) app within seconds, with everything set up for you.
+[Expo](https://expo.dev) is a robust, open-source framework designed to speed up the process of creating apps that run natively on Android, iOS, and the web. By combining the finest aspects of mobile and web technologies, Expo enables a range of essential features for building and expanding apps.
 
-Whether you're a seasoned pro or just starting out, makes it easy to speed up the setup and initialization phase of your project creation process.
+This plugin allows for swift initiation of a new app, with all the necessary features pre-configured and ready to use.
+
+Regardless of your experience level, be it a seasoned developer or a beginner, this plugin simplifies the setup and initialization phases of your project, allowing for a smoother creation process.
 <!-- Plugin description end -->
 
 ## Installation
 
-To install plugin open `Preferences > Plugins > Marketplace`, and search for Expo.
+For plugin installation, navigate to `Preferences`, then `Plugins`, and finally `Marketplace`. In the search bar, enter `Expo`.
 
