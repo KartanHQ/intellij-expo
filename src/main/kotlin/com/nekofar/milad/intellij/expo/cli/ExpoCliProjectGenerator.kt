@@ -12,9 +12,8 @@ import com.intellij.openapi.util.NlsSafe
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.platform.ProjectGeneratorPeer
 import com.intellij.ui.components.JBCheckBox
-import com.nekofar.milad.intellij.expo.ExpoBundle
+import com.nekofar.milad.intellij.expo.ExpoBundle.message
 import com.nekofar.milad.intellij.expo.ExpoIcons
-import javax.swing.Icon
 import javax.swing.JPanel
 
 class ExpoCliProjectGenerator : NpmPackageProjectGenerator() {
@@ -24,17 +23,17 @@ class ExpoCliProjectGenerator : NpmPackageProjectGenerator() {
     private val typeScriptKey = Key.create<Boolean>("expo.project.generator.typescript.project")
     private val typeScriptInitial = false
 
-    override fun getName(): String = ExpoBundle.message("expo.project.generator.name")
+    override fun getName() = message("expo.project.generator.name")
 
-    override fun getDescription(): String = ExpoBundle.message("expo.project.generator.description")
+    override fun getDescription() = message("expo.project.generator.description")
 
-    override fun filters(project: Project, baseDir: VirtualFile): Array<Filter> = emptyArray()
+    override fun filters(project: Project, baseDir: VirtualFile) = emptyArray<Filter>()
 
     override fun customizeModule(virtualFile: VirtualFile, contentEntry: ContentEntry?) {}
 
     override fun createPeer(): ProjectGeneratorPeer<Settings> {
         val typeScriptCheckbox = JBCheckBox(
-            ExpoBundle.message("expo.project.generator.typescript.checkbox"),
+            message("expo.project.generator.typescript.checkbox"),
             typeScriptInitial
         )
 
@@ -61,14 +60,13 @@ class ExpoCliProjectGenerator : NpmPackageProjectGenerator() {
         }
     }
 
-    override fun packageName(): String = packageName
+    override fun packageName() = packageName
 
-    override fun presentablePackageName(): String =
-        ExpoBundle.message("expo.project.generator.presentable.package.name")
+    override fun presentablePackageName() = message("expo.project.generator.presentable.package.name")
 
     override fun getNpxCommands() = listOf(NpxPackageDescriptor.NpxCommand(packageName, npxCommand))
 
-    override fun generateInTemp(): Boolean = true
+    override fun generateInTemp() = true
 
     override fun generatorArgs(project: Project?, dir: VirtualFile?, settings: Settings?): Array<@NlsSafe String>? {
         val typeScript = settings?.getUserData(typeScriptKey) ?: typeScriptInitial
@@ -81,7 +79,7 @@ class ExpoCliProjectGenerator : NpmPackageProjectGenerator() {
         }
     }
 
-    override fun getIcon(): Icon = ExpoIcons.ProjectGenerator
+    override fun getIcon() = ExpoIcons.ProjectGenerator
 
     override fun onGettingSmartAfterProjectGeneration(project: Project, baseDir: VirtualFile) {
         super.onGettingSmartAfterProjectGeneration(project, baseDir)
