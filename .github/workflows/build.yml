@@ -185,6 +185,9 @@ jobs:
       # Check out the current repository
       - name: Fetch Sources
         uses: actions/checkout@v4.2.0
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}  # to check out the actual pull request commit, not the merge commit
+          fetch-depth: 0  # a full history is required for pull request analysis
 
       # Setup Java environment for the next steps
       - name: Setup Java
@@ -205,11 +208,6 @@ jobs:
     needs: [ build ]
     runs-on: ubuntu-latest
     steps:
-      # Remove files to save space
-      - name: Remove unnecessary files
-        run: |
-          sudo rm -rf /usr/share/dotnet
-          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
 
       # Free GitHub Actions Environment Disk Space
       - name: Maximize Build Space
