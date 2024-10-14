@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+## [1.2.0] - 2024-10-14
+
+### Features
+
+- Add `messagePointer` method to ExpoBundle
+
+### Security
+
+- Update gradle wrapper validation action to v4.1.0
+
 ## [1.1.12] - 2024-10-05
 
 ### Bug Fixes
