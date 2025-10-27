@@ -8,7 +8,6 @@ import com.intellij.lang.javascript.boilerplate.NpxPackageDescriptor
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.roots.ContentEntry
 import com.intellij.openapi.util.Key
-import com.intellij.openapi.util.NlsSafe
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.platform.ProjectGeneratorPeer
 import com.intellij.ui.components.JBCheckBox
@@ -29,7 +28,7 @@ class ExpoCliProjectGenerator : NpmPackageProjectGenerator() {
 
     override fun filters(project: Project, baseDir: VirtualFile) = emptyArray<Filter>()
 
-    override fun customizeModule(virtualFile: VirtualFile, contentEntry: ContentEntry?) {}
+    override fun customizeModule(baseDir: VirtualFile, entry: ContentEntry?) {}
 
     override fun createPeer(): ProjectGeneratorPeer<Settings> {
         val typeScriptCheckbox = JBCheckBox(
@@ -68,14 +67,16 @@ class ExpoCliProjectGenerator : NpmPackageProjectGenerator() {
 
     override fun generateInTemp() = true
 
-    override fun generatorArgs(project: Project?, dir: VirtualFile?, settings: Settings?): Array<@NlsSafe String>? {
-        val typeScript = settings?.getUserData(typeScriptKey) ?: typeScriptInitial
-        return project?.let {
-            if (typeScript) arrayOf(
+    override fun generatorArgs(project: Project, dir: VirtualFile, settings: Settings): Array<String> {
+        val typeScript = settings.getUserData(typeScriptKey) ?: typeScriptInitial
+        return if (typeScript) {
+            arrayOf(
                 "-t",
                 "expo-template-blank-typescript",
-                it.name
-            ) else arrayOf(it.name)
+                project.name
+            )
+        } else {
+            arrayOf(project.name)
         }
     }
 
