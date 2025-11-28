@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+## [1.3.3] - 2025-11-28
+
+### Bug Fixes
+
+- Update debug server process configuration
+
 ## [1.3.2] - 2025-10-27
 
 ### Bug Fixes
