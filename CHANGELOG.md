@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
-## [1.3.5] - 2025-12-13
+## [1.3.5] - 2026-01-05
 
 ### Bug Fixes
 
