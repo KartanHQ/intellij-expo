@@ -8,11 +8,6 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 
 - Solve some minor issues and update dependencies
-
-## [1.3.5] - 2025-12-13
-
-### Bug Fixes
-
 - Solve some minor issues and update dependencies
 
 ## [1.3.4] - 2025-11-29
